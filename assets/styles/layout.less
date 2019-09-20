@@ -1,0 +1,178 @@
+/*
+  页面布局
+*/
+@bodyWidth: 1200px;
+@colWidth: floor(@bodyWidth/24);
+body {
+  min-width: @bodyWidth;
+}
+
+/* `Container
+----------------------------------------------------------------------------------------------------*/
+
+.container_24 {
+  margin-left: auto;
+  margin-right: auto;
+  width: @bodyWidth;
+}
+
+/* `Grid >> Global
+----------------------------------------------------------------------------------------------------*/
+.global_loop(@n,@i:1) when (@i <= @n) {
+  .grid_@{i} {
+    display: block;
+    float: left;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .push_@{i}, .pull_@{i} {
+    position: relative;
+  }
+  .global_loop(@n, (@i+1))
+}
+
+.global_loop(24);
+
+.grid_7_2,
+.grid_8_2,
+.grid_16_2 {
+  display: block;
+  float: left;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+/* `Grid >> 24 Columns
+----------------------------------------------------------------------------------------------------*/
+.grid_loop(@n,@i:1) when (@i <= @n) {
+  .grid_@{i} {
+    width: @colWidth*@i;
+  }
+  .grid_loop(@n, (@i+1))
+}
+
+.container_24 {
+  .grid_loop(24);
+}
+
+.container_24 .grid_7_2 {
+  width: (@colWidth*7+@colWidth*8)/2;
+}
+
+.container_24 .grid_8_2 {
+  width: (@colWidth*8+@colWidth*9)/2;
+}
+
+.container_24 .grid_16_2 {
+  width: (@colWidth*16+@colWidth*17)/2;
+}
+
+/* `Prefix Extra Space >> 24 Columns
+----------------------------------------------------------------------------------------------------*/
+.prefix_loop(@n,@i:1) when (@i <= @n) {
+  .prefix_@{i} {
+    padding-left: @colWidth*@i;
+  }
+  .prefix_loop(@n, (@i+1))
+}
+
+.container_24 {
+  .prefix_loop(23);
+}
+
+/* `Suffix Extra Space >> 24 Columns
+----------------------------------------------------------------------------------------------------*/
+.suffix_loop(@n,@i:1) when (@i <= @n) {
+  .suffix_@{i} {
+    padding-right: @colWidth*@i;
+  }
+  .suffix_loop(@n, (@i+1))
+}
+
+.container_24 {
+  .suffix_loop(23);
+}
+
+/* `Push Space >> 24 Columns
+----------------------------------------------------------------------------------------------------*/
+.push_loop(@n,@i:1) when (@i <= @n) {
+  .push_@{i} {
+    position: relative;
+    left: @colWidth*@i;
+  }
+  .push_loop(@n, (@i+1))
+}
+
+.container_24 {
+  .push_loop(23);
+}
+
+/* `Pull Space >> 24 Columns
+----------------------------------------------------------------------------------------------------*/
+.pull_loop(@n,@i:1) when (@i <= @n) {
+  .pull_@{i} {
+    position: relative;
+    left: -@colWidth*@i;
+  }
+  .pull_loop(@n, (@i+1))
+}
+
+.container_24 {
+  .pull_loop(23);
+}
+
+/* `Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------------------------------*/
+
+.alpha {
+  margin-left: 0;
+}
+
+.omega {
+  margin-right: 0;
+}
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified */
+
+.clearfix:before,
+.clearfix:after,
+.container_24:before,
+.container_24:after {
+  content: '.';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after,
+.container_24:after {
+  clear: both;
+}
+
+/*
+  The following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix,
+.container_24 {
+  zoom: 1;
+}

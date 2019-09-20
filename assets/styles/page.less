@@ -1,0 +1,1773 @@
+@import "mixins";
+
+/* 首页样式 */
+.main_page_container {
+  .module_title {
+    .ht-lineHt(50px);
+    border-bottom: 1px solid @border-color-base;
+
+    .module_name {
+      color: @primary-color;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .module_name_en {
+      color: #999;
+      font-size: 14px;
+    }
+
+    .more {
+      float: right;
+    }
+  }
+
+  /*教学模块*/
+
+  .teaching_module {
+    .teaching_module_carousel {
+      position: relative;
+      width: 100%;
+      min-height: 282px;
+      overflow: hidden;
+
+      .left {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -22px;
+        z-index: 2;
+        cursor: pointer;
+      }
+
+      .right {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -22px;
+        z-index: 2;
+        cursor: pointer;
+      }
+
+      .carousel_list {
+        position: relative;
+        z-index: 1;
+        padding: 30px 0 26px 0;
+
+        .carousel_item {
+          display: table-cell;
+          .wh(305px, 224px);
+
+          &:hover {
+            a {
+              display: block;
+              box-shadow: 0 0 20px 0 #ccc;
+            }
+
+            img {
+              border: 2px solid @primary-color;
+            }
+          }
+
+          img {
+            .wh(285px, 179px);
+          }
+
+          p {
+            padding: 0 10px;
+            width: 100%;
+            .ht-lineHt(47px);
+            background-color: @gray-f4;
+            font-size: 16px;
+            text-align: center;
+            .ellipsis();
+          }
+        }
+      }
+    }
+  }
+
+  /* 专题模块 */
+
+  .thematic_module {
+    .thematic_list {
+      margin-top: 30px;
+      .clearFix();
+
+      .thematic_item {
+        float: left;
+        position: relative;
+        .wh(285px, 179px);
+        margin-left: 20px;
+        margin-bottom: 20px;
+
+        &:hover {
+          img {
+            border: 2px solid @primary-color;
+          }
+        }
+
+        img {
+          .wh(285px, 179px);
+        }
+
+        span {
+          position: absolute;
+          left: 0;
+          bottom: 15px;
+          display: inline-block;
+          .wh(90px, 28px);
+          line-height: 28px;
+          padding: 0 10px;
+          background: url("../images/radius_block.png") no-repeat left top;
+          color: #fff;
+        }
+
+        &:nth-child(4n+1) {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  /* 教学安排 */
+
+  .teaching_plan_container {
+    margin-top: 30px;
+    background: url("../images/teaching_plan_bg.png") no-repeat top center;
+
+    .teaching_plan_img {
+      float: left;
+    }
+
+    .plan_list {
+      float: left;
+      margin-left: 82px;
+
+      .plan_item {
+        float: left;
+        margin-right: 20px;
+        height: 130px;
+        min-width: 100px;
+        text-align: center;
+
+        .plan_item_img_block {
+          .square(80px);
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        img {
+          .square(80px);
+          border-radius: 50%;
+          transition: 0.3s ease-in;
+        }
+
+        &.active {
+          p {
+            color: @primary-color;
+          }
+
+          .plan_item_img_block {
+            border: 2px solid @primary-color;
+          }
+        }
+
+        &:hover {
+          .plan_item_img_block {
+            img {
+              transform: scale(1.1);
+            }
+          }
+        }
+
+
+        p {
+          font-size: 16px;
+          line-height: 2;
+          text-align: center;
+        }
+      }
+    }
+
+    .teaching_plan_line {
+      width: 1200px;
+    }
+
+    .plan_data_list {
+      margin-top: 30px;
+
+      .plan_data_item {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        .wh(224px, 40px);
+        line-height: 40px;
+        text-align: center;
+        background: url("../images/teaching_plan_block_bg.png") no-repeat top center;
+        cursor: pointer;
+
+        &:hover {
+          background: url("../images/teaching_plan_block_hover_bg.png") no-repeat top center;
+          box-shadow: 4px 4px 8px 0 #999;
+        }
+
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          color: #ad6c03;
+          font-size: 16px;
+        }
+
+        &:nth-child(5n+5) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  /* 名师风采 */
+
+  .elegant_demeanor {
+    .teacher_list {
+      .clearFix();
+
+      .teacher_item {
+        margin-top: 20px;
+        float: left;
+        .clearFix();
+
+        .img_block, img {
+          .wh(140px, 176px);
+          overflow: hidden;
+          transition: 0.3s ease-in;
+        }
+
+        .teacher_info {
+          position: relative;
+          .wh(260px, 176px);
+          padding: 0 20px;
+
+          .teacher_name {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1;
+          }
+
+          .teacher_business {
+            width: 100%;
+            .ellipsis();
+            line-height: 36px;
+          }
+
+          .line {
+            .wh(30px, 3px);
+            background-color: @primary-color;
+          }
+
+          .teacher_course {
+            margin-top: 8px;
+
+            p {
+              line-height: 2;
+            }
+
+            ul {
+              li {
+                line-height: 1.5;
+                width: 100%;
+              }
+            }
+          }
+        }
+
+        .img_block, .teacher_info {
+          float: left;
+        }
+
+        &:hover {
+          cursor: pointer;
+
+          img {
+            transform: scale(1.1);
+          }
+
+          .teacher_info .teacher_name, .teacher_info .teacher_business, .teacher_info .teacher_course p {
+            color: @primary-color;
+          }
+        }
+      }
+    }
+  }
+
+  /* 成功案例 */
+
+  .successful_case {
+    .successful_case_list {
+      margin-top: 30px;
+      .clearFix();
+
+      .case_item {
+        float: left;
+        .wh(285px, auto);
+
+        & + .case_item {
+          margin-left: 20px;
+        }
+
+        &:hover {
+          img {
+            border: 2px solid @primary-color;
+          }
+        }
+
+        img {
+          .wh(285px, 179px);
+        }
+
+        p {
+          width: 100%;
+          line-height: 52px;
+          font-size: 16px;
+          .ellipsis();
+        }
+      }
+    }
+  }
+
+  /* 最美南泥湾 */
+
+  .beautiful_nanniwan {
+    margin-bottom: 50px;
+
+    .beautiful_nanniwan_container {
+      margin-top: 30px;
+      .clearFix();
+
+      .img_shown_block {
+        float: left;
+        overflow: hidden;
+        .wh(710px, 460px);
+
+        img, video {
+          .wh(710px, 460px);
+          transition: 0.3s ease-in;
+        }
+
+        &:hover {
+          img {
+            transform: scale(1.05);
+          }
+        }
+      }
+
+      .img_thumb_list_container {
+        position: relative;
+        float: left;
+        width: 480px;
+        height: 460px;
+        padding: 40px 0 40px 15px;
+
+        .control_btn {
+          position: absolute;
+          left: 50%;
+          width: 100%;
+          margin-left: -230px;
+          background-color: #fff;
+          z-index: 1000;
+          cursor: pointer;
+          text-align: center;
+          padding: 10px;
+
+          &.control_up {
+            top: 0;
+          }
+
+          &.control_down {
+            bottom: 0;
+          }
+        }
+
+        .list_container {
+          height: 390px;
+          overflow: hidden;
+        }
+
+        .img_thumb_list {
+          .img_thumb_item {
+            position: relative;
+            .clearFix();
+            padding: 18px 0;
+            .wh(100%, 130px);
+            cursor: pointer;
+
+            &:after {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              content: '';
+              display: block;
+              width: 20px;
+              height: 100%;
+              background-color: #9c9c9c;
+            }
+
+            img {
+              float: left;
+              .wh(140px, 90px);
+            }
+
+            .item_info {
+              margin-left: 10px;
+              float: left;
+              width: 315px;
+
+              .name {
+                font-size: 20px;
+              }
+
+              .desc {
+                margin-top: 10px;
+                line-height: 1.5;
+              }
+
+            }
+
+            &.active {
+              img {
+                border: 2px solid @primary-color;
+              }
+
+              .name {
+                color: @primary-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 学院简介样式 */
+.college_info_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .college_info_page_container {
+    margin-top: 40px;
+
+    .header {
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .float_text {
+      position: absolute;
+      display: block;
+      .wh(128px, 42px);
+      background-color: @primary-color;
+      text-align: center;
+      font-size: 18px;
+      line-height: 42px;
+      color: #fff;
+      z-index: 3;
+    }
+
+    .night_scene {
+      position: relative;
+      margin-top: 20px;
+
+      .float_text {
+        right: -10px;
+        top: 28px;
+      }
+    }
+
+    .college_pingmian {
+      margin-top: 40px;
+      position: relative;
+      .clearFix();
+
+      img {
+        float: left;
+      }
+
+      .float_text {
+        top: -10px;
+        left: -10px;
+      }
+
+      p {
+        float: left;
+        margin-left: 36px;
+        .wh(738px, 284px);
+        overflow: hidden;
+        text-indent: 2em;
+        font-size: 17px;
+        line-height: 1.8;
+        font-weight: bold;
+      }
+    }
+
+    .education_base {
+      margin-top: 50px;
+      position: relative;
+      .clearFix();
+
+      .paragraph_container {
+        float: left;
+        width: 734px;
+        line-height: 1.8;
+        font-size: 16px;
+
+        p {
+          text-indent: 2em;
+          font-size: 17px;
+          font-weight: bold;
+        }
+
+        p + p {
+          margin-top: 50px;
+        }
+      }
+
+      .float_text {
+        top: 175px;
+        right: 10px;
+      }
+
+      .img3 {
+        margin-left: 36px;
+        float: left;
+      }
+
+      .img_4 {
+        position: absolute;
+        right: 0;
+        top: 200px;
+        z-index: 2;
+      }
+    }
+
+    .core_value {
+      margin-top: 64px;
+    }
+  }
+}
+
+/* 学院优势样式 */
+.college_feature_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .college_feature_page_container {
+    margin-top: 40px;
+
+    .header {
+
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .content {
+      .header_banner {
+        margin-top: 24px;
+        .wh(100%, 82px);
+        background: url("../images/college_feature_1.png") no-repeat center;
+        padding: 30px 283px 14px 137px;
+        line-height: 1.5;
+      }
+
+      .feature_list {
+        margin-top: 30px;
+        .clearFix();
+
+        .feature_item {
+          float: left;
+          position: relative;
+          margin-bottom: 40px;
+          margin-right: 19px;
+          .wh(387px, 428px);
+
+          &:nth-child(3n+3) {
+            margin-right: 0px;
+          }
+
+          .feature_img {
+            .wh(387px, 230px);
+          }
+
+          .feature_name {
+            position: absolute;
+            top: 192px;
+            right: 0;
+            .wh(260px, 39px);
+            background: url("../images/college_feature_text_bg.png") no-repeat right center;
+            padding-right: 20px;
+            font-size: 17px;
+            text-align: right;
+            line-height: 39px;
+            color: #fff;
+            z-index: 1;
+          }
+
+          .feature_desc {
+            .wh(387px, 200px);
+            padding: 19px 22px;
+            background: #f4f4f4;
+            text-indent: 2em;
+            line-height: 2;
+            overflow: hidden;
+          }
+
+          .feature_hover_desc {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            .wh(387px, 428px);
+            background: url("../images/college_feature_block_bg.png") no-repeat center center;
+            color: #fff;
+          }
+
+          .item_index {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            margin-left: -15px;
+            .wh(30px, 40px);
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            font-size: 20px;
+            background: url("../images/college_feature_index_bg.png") no-repeat center center;
+            z-index: 5;
+          }
+
+          &:hover {
+            .feature_hover_desc {
+              display: block;
+              z-index: 3;
+              padding: 35px 28px 20px 28px;
+
+              .hover_feature_name {
+                color: #ffd800;
+                font-size: 28px;
+                padding-left: 25px;
+
+                &:after {
+                  content: '';
+                  display: block;
+                  margin-top: 25px;
+                  .wh(36px, 4px);
+                  background-color: #ffd800;
+                }
+              }
+
+              .hover_feature_desc {
+                margin-top: 25px;
+                color: #fff;
+                line-height: 2;
+                text-indent: 2em;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+/* 新闻中心样式 */
+.news_center_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .news_center_page_container {
+    margin-top: 40px;
+
+    .header {
+
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      margin-top: 19px;
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+        left: 0;
+      }
+    }
+
+    .news_center_nav {
+      margin-top: 23px;
+      text-align: right;
+
+      .news_center_nav_tab {
+        display: inline-block;
+        margin-left: 22px;
+        padding: 0 12px;
+        .ht-lineHt(34px);
+        background-color: @gray-f4;
+        color: #999;
+
+        &:hover {
+          background-color: @primary-4;
+          color: #eee;
+        }
+
+        &.active {
+          background-color: @primary-color;
+          color: #fff;
+        }
+      }
+    }
+
+    .news_list {
+      .news_item {
+        padding: 24px 0 14px 0;
+        border-bottom: 1px solid @gray-f4;
+
+        .news_item_block {
+          .clearFix();
+
+          .news_date_block {
+            float: left;
+            .wh(48px, 100%);
+
+            .news_date_day {
+              .wh(48x, 48px);
+              border: 1px solid @primary-color;
+              text-align: center;
+              line-height: 48px;
+              font-size: 29px;
+              color: @primary-color;
+            }
+
+            .news_date_month {
+              font-size: 12px;
+              color: #999;
+              line-height: 2;
+            }
+          }
+
+          .news_info {
+            float: left;
+            margin-left: 20px;
+
+            &.max_width {
+              width: 1125px;
+            }
+
+            &.min_width {
+              width: 850px;
+            }
+
+            .news_name {
+              .ht-lineHt(48px);
+              font-size: 16px;
+            }
+
+            .news_desc {
+              margin-top: 10px;
+              color: #999;
+            }
+          }
+
+          .news_img {
+            float: right;
+            margin-left: 47px;
+
+            img {
+              .wh(204px, 125px);
+            }
+          }
+        }
+
+        .news_item_link {
+          margin-top: 25px;
+          text-align: right;
+
+          a {
+            display: inline-block;
+            padding: 0 12px;
+            .ht-lineHt(34px);
+            background-color: @gray-f4;
+            color: #999;
+            text-align: center;
+
+            &:hover {
+              background-color: @primary-color;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+
+    .pagination_container {
+      margin-top: 80px;
+
+      & > div[tm-pagation] {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+/* 新闻详情 */
+.news_detail_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .news_detail_page_container {
+    margin-top: 40px;
+
+    .header {
+
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      margin-top: 19px;
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+        left: 0;
+      }
+    }
+
+    .news_detail_content_container {
+      position: relative;
+
+      .news_operation {
+        float: left;
+        width: 160px;
+        padding-left: 28px;
+        padding-top: 135px;
+
+        .news_date_block {
+          .wh(48px, 100%);
+
+          .news_date_day {
+            .wh(48x, 48px);
+            border: 1px solid @primary-color;
+            text-align: center;
+            line-height: 48px;
+            font-size: 29px;
+            color: @primary-color;
+          }
+
+          .news_date_month {
+            font-size: 12px;
+            color: #999;
+            line-height: 2;
+          }
+        }
+
+        .gray_text {
+          margin-top: 47px;
+          color: #999;
+        }
+
+        .favorite_add, .favorite_del {
+          display: block;
+          margin-top: 18px;
+          text-align: center;
+          .wh(48px, 38px);
+        }
+
+        .print {
+          margin-top: 14px;
+          display: block;
+          .wh(48px, 38px);
+          background: url("../images/print_normal.png") no-repeat center center;
+
+          &:hover {
+            background: url("../images/print_hover.png") no-repeat center center;
+          }
+        }
+      }
+
+      .article-detail {
+        float: left;
+        width: 1040px;
+
+        .article-detail-title-bar {
+          border-bottom: none;
+        }
+
+        .article-detail-title {
+          margin-top: 69px;
+          font-size: 32px;
+          font-weight: normal;
+          white-space: pre-wrap;
+        }
+
+        .article-detail-info {
+          margin-top: 24px;
+        }
+
+        .article-detail-content {
+          margin-top: 50px;
+          width: 100%;
+          overflow: hidden;
+
+          img {
+            max-width: 100%;
+          }
+        }
+
+        .article-detail-footer {
+          margin-top: 80px;
+
+          .up_and_down_link {
+            font-size: 16px;
+            line-height: 2;
+          }
+
+          .article_source {
+            line-height: 64px;
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+/* 名师详情 */
+.elegant_demeanor_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .elegant_demeanor_page_container {
+    margin-top: 40px;
+
+    .page_header {
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      margin-top: 19px;
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+        left: 0;
+      }
+    }
+
+    .content {
+      .teacher_list {
+        margin-top: 30px;
+        .clearFix();
+
+        .teacher_item {
+          float: left;
+          position: relative;
+          width: 585px;
+          margin-bottom: 20px;
+          margin-right: 26px;
+
+          &:nth-child(2n+2) {
+            margin-right: 0;
+          }
+
+          .left_circle {
+            position: relative;
+            .square(160px);
+            background-color: @primary-color;
+            border-radius: 50%;
+            z-index: 1;
+            text-align: center;
+            line-height: 160px;
+          }
+
+          .teacher_img {
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            .square(144px);
+            border-radius: 50%;
+            z-index: 3;
+            border-right: 1px solid #fff;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+          }
+
+          .teacher_info_block {
+            position: absolute;
+            z-index: 2;
+            .wh(480px, 130px);
+            left: 106px;
+            top: 15px;
+            background-color: #f7f7f7;
+            padding-left: 70px;
+            padding-top: 20px;
+
+            .teacher_name {
+              font-size: 18px;
+
+              .teacher_flag {
+                display: inline-block;
+                .wh(45px, 18px);
+                font-size: 12px;
+                line-height: 18px;
+                padding-left: 12px;
+                color: #fff;
+                background: url("../images/elegant_demeanor_flag_img.png") no-repeat left center;
+              }
+            }
+
+            .teacher_business {
+              margin-top: 5px;
+              padding-right: 50px;
+              line-height: 2;
+            }
+          }
+
+          .teacher_link {
+            position: absolute;
+            z-index: 3;
+            right: 0;
+            bottom: 30px;
+            .wh(90px, 28px);
+            line-height: 28px;
+            background-color: @primary-color;
+            color: #fff;
+            text-align: center;
+          }
+        }
+      }
+
+      .pagination_container {
+        margin-top: 40px;
+        text-align: right;
+
+        .pagination_block {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+/* 课程安排 */
+.course_arrangement_page {
+
+  .course_arrangement_page_container {
+    margin-top: 40px;
+
+    .page_header {
+      margin-bottom: 19px;
+
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+      }
+
+      &.left {
+        &:after {
+          left: 0;
+        }
+      }
+
+      &.right {
+        &:after {
+          right: 0;
+        }
+      }
+    }
+
+    .course_arrangement_block {
+
+      .block_title {
+        position: relative;
+        margin-top: 20px;
+
+        .title_index {
+          .wh(45px, 48px);
+          line-height: 48px;
+          background: url("../images/course_arrangement_rank_bg.png") no-repeat center center;
+          color: #fff;
+          font-size: 30px;
+          padding-left: 10px;
+          font-weight: bold;
+        }
+
+        .title_text {
+          .ht-lineHt(48px);
+          font-size: 20px;
+          margin-left: 14px;
+          margin-right: 17px;
+          color: #555;
+        }
+      }
+
+      .block_content {
+        .clearFix();
+
+        .teach_type_content {
+          margin-top: 20px;
+          float: left;
+          width: 902px;
+          font-size: 16px;
+          color: #999;
+          line-height: 1.8;
+          text-indent: 2em;
+        }
+
+        .teach_type_img {
+          float: left;
+          margin-left: 88px;
+        }
+      }
+
+      &.block_1 {
+        padding-bottom: 60px;
+      }
+
+      &.block_2 {
+        padding-bottom: 60px;
+
+        .teaching_module_name_list {
+          margin-right: 28px;
+          float: right;
+          .clearFix();
+          height: 48px;
+          padding: 8px 0;
+
+          .teaching_module_name_item {
+            float: left;
+            margin-left: 10px;
+            .ht-lineHt(32px);
+            padding: 0 18px;
+            border-radius: 16px;
+            background-color: @gray-f4;
+            text-align: center;
+            color: #555;
+            cursor: pointer;
+
+            &.active {
+              background-color: @primary-color;
+              color: #fff;
+            }
+          }
+        }
+
+        .teaching_module_detail_list {
+          margin-top: 44px;
+
+          .teaching_module_detail_item {
+            .clearFix();
+            position: relative;
+
+            .item_img {
+              float: left;
+              .wh(260px, 160px);
+            }
+
+            .item_desc {
+              float: left;
+              margin-top: 15px;
+              margin-left: 20px;
+              width: 877px;
+              line-height: 1.8;
+              color: #999;
+            }
+
+            .more {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+            }
+          }
+        }
+      }
+
+      &.block_3 {
+        padding-bottom: 60px;
+
+        .teach_place_list {
+          margin-top: 30px;
+          .clearFix();
+
+          .teach_place_item {
+            float: left;
+            .wh(285px, 224px);
+
+            & + .teach_place_item {
+              margin-left: 20px;
+            }
+
+            .place_img {
+              .wh(285px, 179px);
+            }
+
+            .place_name {
+              width: 100%;
+              padding: 0 10px;
+              .ht-lineHt(45px);
+              .ellipsis();
+              background-color: @gray-f4;
+              text-align: center;
+
+              img {
+                margin-top: -2px;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+
+      &.block_4 {
+        padding-bottom: 60px;
+
+        .plan_list {
+          margin-right: 28px;
+          float: right;
+          .clearFix();
+          height: 48px;
+          padding: 8px 0;
+
+          .plan_item {
+            float: left;
+            margin-left: 10px;
+            .ht-lineHt(32px);
+            padding: 0 18px;
+            border-radius: 16px;
+            background-color: @gray-f4;
+            text-align: center;
+            color: #555;
+            cursor: pointer;
+
+            &.active {
+              background-color: @primary-color;
+              color: #fff;
+            }
+          }
+        }
+
+        .plan_data_list {
+          margin-top: 30px;
+
+          .plan_data_item {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            .wh(224px, 40px);
+            line-height: 40px;
+            text-align: center;
+            background: url("../images/teaching_plan_block_bg.png") no-repeat top center;
+            cursor: pointer;
+
+            &:hover {
+              background: url("../images/teaching_plan_block_hover_bg.png") no-repeat top center;
+            }
+
+            a {
+              display: block;
+              width: 100%;
+              height: 100%;
+              color: #ad6c03;
+              font-size: 16px;
+            }
+
+            &:nth-child(5n+5) {
+              margin-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 现场教学点样式 */
+.onsite_teaching_page {
+  background: url("../images/teaching_plan_bg.png") no-repeat bottom -240px center;
+  padding-bottom: 324px;
+
+  .onsite_teaching_page_container {
+    margin-top: 40px;
+
+    .page_header {
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      margin-top: 19px;
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+        left: 0;
+      }
+    }
+
+    .content {
+      .teach_place_list {
+        margin-top: 30px;
+        .clearFix();
+
+        .teach_place_item {
+          float: left;
+          .wh(285px, 224px);
+          margin-bottom: 40px;
+
+          & + .teach_place_item {
+            margin-left: 20px;
+          }
+
+          .place_img {
+            .wh(285px, 179px);
+          }
+
+          .place_name {
+            width: 100%;
+            padding: 0 10px;
+            .ht-lineHt(45px);
+            .ellipsis();
+            background-color: @gray-f4;
+            text-align: center;
+
+            img {
+              margin-top: -2px;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+
+      .pagination_container {
+        margin-top: 40px;
+        text-align: right;
+
+        .pagination_block {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+/* 日程安排 */
+.train_schedule_page {
+  padding-bottom: 96px;
+
+  .train_schedule_page_container {
+    margin-top: 40px;
+
+    .page_header {
+      .header_nav {
+        float: right;
+        line-height: 76px;
+
+        img {
+          margin-top: -2px;
+          margin-right: 4px;
+        }
+
+        .active {
+          color: @primary-color;
+        }
+      }
+    }
+
+    .header_divide_line {
+      margin-top: 19px;
+      position: relative;
+      .wh(100%, 2px);
+      background-color: @gray-f4;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        .wh(221px, 4px);
+        background-color: @primary-color;
+        top: -1px;
+        left: 0;
+      }
+    }
+
+    .content {
+      .train_schedule_info {
+        margin-top: 30px;
+        padding-top: 20px;
+        .wh(100%, 200px);
+        background-color: @gray-f4;
+        background-image: url("../images/train_schedule_bg_1.png");
+        background-position: right bottom;
+        background-repeat: no-repeat;
+        overflow: hidden;
+
+        .info_title {
+          position: relative;
+          background-color: @primary-color;
+          .wh(240px, 32px);
+          line-height: 32px;
+          font-size: 16px;
+          color: #fff;
+          padding-left: 30px;
+
+          &:before {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            display: block;
+            content: '';
+            .square(8px);
+            border-radius: 50%;
+            margin-top: -4px;
+            background-color: #fff;
+          }
+
+          &:after {
+            position: absolute;
+            right: 0;
+            top: 0;
+            content: '';
+            display: block;
+            border-right: 12px solid @gray-f4;
+            border-top: 16px solid @primary-color;
+            border-bottom: 16px solid @primary-color;
+            border-left: none;
+          }
+        }
+
+        .info_list {
+          margin-left: 30px;
+          line-height: 1.5;
+          padding: 20px 60px 20px 0;
+          border-right: 1px dashed #cdcdcd;
+
+          &:nth-child(1) {
+            margin-right: 30px;
+          }
+
+          &:nth-child(2) {
+            border-right: none;
+          }
+        }
+      }
+
+      .train_schedule_list {
+        position: relative;
+        margin-top: 50px;
+        margin-left: 65px;
+        border-left: 1px solid #e8e8e8;
+        padding: 25px 0 25px 25px;
+
+        ul {
+          li {
+            position: relative;
+            margin-bottom: 25px;
+
+            &:nth-last-child(1) {
+              margin-bottom: 0;
+            }
+
+            .day_name {
+              position: absolute;
+              .square(40px);
+              line-height: 40px;
+              text-align: center;
+              color: #fff;
+              font-size: 16px;
+              left: -93px;
+              top: 25px;
+              border-radius: 50%;
+            }
+
+            .day_text_block {
+              width: 278px;
+              padding: 18px 51px 20px 40px;
+              line-height: 1.5;
+              min-height: 80px;
+            }
+
+            .day_table_block {
+              width: 1106px;
+              padding: 25px;
+            }
+
+            &:before {
+              content: '';
+              display: block;
+              position: absolute;
+              left: -31px;
+              top: 38px;
+              .square(10px);
+              border-radius: 50%;
+            }
+
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              left: -26px;
+              top: 38px;
+              border-left: 10px solid #e41f29;
+              border-top: 5px solid transparent;
+              border-bottom: 5px solid transparent;
+              border-right: none;
+            }
+
+            &:nth-child(1n+1) {
+              .day_name, &:before {
+                background-color: #e41f29;
+              }
+
+              &:after {
+                border-left-color: #e41f29;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #fdeaeb;
+              }
+            }
+
+            &:nth-child(2n+2) {
+              .day_name, &:before {
+                background-color: #ee7f2c;
+              }
+
+              &:after {
+                border-left-color: #ee7f2c;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #fffaf6;
+              }
+            }
+
+            &:nth-child(3n+3) {
+              .day_name, &:before {
+                background-color: #fddc01;
+              }
+
+              &:after {
+                border-left-color: #fddc01;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #fffdf2;
+              }
+            }
+
+            &:nth-child(4n+4) {
+              .day_name, &:before {
+                background-color: #69ba4f;
+              }
+
+              &:after {
+                border-left-color: #69ba4f;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #f5fff2;
+              }
+            }
+
+            &:nth-child(5n+5) {
+              .day_name, &:before {
+                background-color: #50c0eb;
+              }
+
+              &:after {
+                border-left-color: #50c0eb;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #f0fafe;
+              }
+            }
+
+            &:nth-child(6n+6) {
+              .day_name, &:before {
+                background-color: #385ca8;
+              }
+
+              &:after {
+                border-left-color: #385ca8;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #f2f6ff;
+              }
+            }
+
+            &:nth-child(7n+7) {
+              .day_name, &:before {
+                background-color: #8577ca;
+              }
+
+              &:after {
+                border-left-color: #8577ca;
+              }
+
+              .day_text_block, .day_table_block {
+                background-color: #f2efff;
+              }
+            }
+          }
+        }
+
+        .table-bordered {
+          border: none;
+
+          & > tbody > tr:nth-child(1) td {
+            border-top: none;
+          }
+
+          & > tbody > tr:nth-last-child(1) td {
+            border-bottom: none;
+          }
+
+          & > tbody > tr > td {
+            &:nth-child(1) {
+              border-left: none
+            }
+
+            &:nth-last-child(1) {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
