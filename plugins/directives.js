@@ -1,12 +1,18 @@
 import Vue from 'vue'
-import notFound from '~/assets/images/notFound.jpeg'
+import noPhoto from '~/assets/images/notFound.jpeg'
 
 Vue.directive('err-src', {
-  inserted: el => {
-  },
   bind (el, binding, vnode, oldVnode) {
-    el.onerror = () => {
-      el.src = binding.value || notFound
+    if (!el.src) {
+      el.src = binding.value || noPhoto
+    }
+    el.onerror = (e) => {
+      el.src = binding.value || noPhoto
+    }
+  },
+  update (el, binding) {
+    if (!el.src) {
+      el.src = binding.value || noPhoto
     }
   }
 })

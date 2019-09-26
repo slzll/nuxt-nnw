@@ -1,3 +1,27 @@
+const createProxy = (context, config) => {
+  let target = 'https://www.nnwxy.cn'
+  return [context, {
+    target,
+    changeOrigin: true,
+    https: true,
+    xfwd: true,
+    cookieDomainRewrite: { '.nnwxy.cn': 'localhost' },
+    ...config
+  }]
+}
+
+const proxy = (function () {
+  if (process.env.NODE_ENV === 'development') {
+    return [
+      createProxy('/api', {}),
+      createProxy('/Content', {}),
+      createProxy('/lessionnew', {})
+    ]
+  } else {
+    return []
+  }
+})()
+
 module.exports = {
   mode: 'universal',
   /*
@@ -58,26 +82,7 @@ module.exports = {
   axios: {
     proxy: true
   },
-  proxy: [
-    ['/api', {
-      target: 'https://www.nnwxy.cn',
-      changeOrigin: true,
-      https: true,
-      cookieDomainRewrite: { '.nnwxy.cn': 'localhost' }
-    }],
-    ['/lessionnew', {
-      target: 'https://www.nnwxy.cn',
-      changeOrigin: true,
-      https: true,
-      cookieDomainRewrite: { '.nnwxy.cn': 'localhost' }
-    }],
-    ['/Content', {
-      target: 'https://www.nnwxy.cn',
-      changeOrigin: true,
-      https: true,
-      cookieDomainRewrite: { '.nnwxy.cn': 'localhost' }
-    }]
-  ],
+  proxy,
   /*
   ** Build configuration
   */
@@ -91,5 +96,14 @@ module.exports = {
   },
   server: {
     port: 9000
+  },
+  router: {
+    extendRoutes (routes, resolve) {
+      routes.push({
+        name: 'error',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
   }
 }

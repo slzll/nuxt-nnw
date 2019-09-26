@@ -48,18 +48,13 @@
       NoticeAnnouncement,
       PageHeader
     },
-    async asyncData ({ app, req, store }) {
-      if (!process.server) {
-        return
-      }
+    async asyncData ({ app, isDev }) {
+      let prefix = !isDev && process.server ? 'http://localhost' : ''
       const articleParams = { page: 1, rows: 3, sort: 'sort', order: 'desc' }
-      let userInfo = await app.$axios.$post(ALLAPI.LoginShort)
-      const { RoleName, UserType } = userInfo.Data
-      store.commit(SAVE_USER_INFO, { ...userInfo.Data.Model, RoleName, UserType })
-      let leftNotice = await app.$axios.$post(ALLAPI.LeftNotice, articleParams)
+      let leftNotice = await app.$axios.$post(prefix + ALLAPI.LeftNotice, articleParams)
       const noticeData = leftNotice.Data.ListData
       const imgPath = leftNotice.Data.Path
-      let teachingData = await app.$axios.$post(ALLAPI.ArticleList, {
+      let teachingData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
         ...articleParams,
         rows: 8,
         CategoryCode: '精品教学模块'
@@ -67,21 +62,21 @@
       const teachingModuleList = teachingData.Data.ListData
       const articleImgPath = teachingData.Data.Path
 
-      let teacherData = await app.$axios.$post(ALLAPI.ArticleList, {
+      let teacherData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
         ...articleParams,
         rows: 6,
         CategoryCode: '名师风采'
       })
       const teacherList = teacherData.Data.ListData
 
-      let successData = await app.$axios.$post(ALLAPI.ArticleList, {
+      let successData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
         ...articleParams,
         rows: 4,
         CategoryCode: '成功案例'
       })
       const caseList = successData.Data.ListData
 
-      let beautifulData = await app.$axios.$post(ALLAPI.ArticleList, {
+      let beautifulData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
         ...articleParams,
         rows: 6,
         CategoryCode: '南泥湾风光'
@@ -105,6 +100,12 @@
         caseList,
         beautifulList
       }
+    },
+    async fetch ({ app, store, isDev }) {
+      let prefix = !isDev && process.server ? 'http://localhost' : ''
+      let userInfo = await app.$axios.$post(prefix + ALLAPI.LoginShort)
+      const { RoleName, UserType } = userInfo.Data
+      store.commit(SAVE_USER_INFO, { ...userInfo.Data.Model, RoleName, UserType })
     },
     mounted () {
     },
