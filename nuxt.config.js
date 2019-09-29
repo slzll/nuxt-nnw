@@ -46,7 +46,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'iview/dist/styles/iview.css',
+    '@/assets/styles/iview.less',
     'swiper/dist/css/swiper.css',
     'animate.css',
     '@/assets/styles/main.less'
@@ -58,7 +58,8 @@ module.exports = {
     '@/plugins/iview',
     { src: '@/plugins/swiper', ssr: false },
     '@/plugins/filters',
-    '@plugins/directives'
+    '@plugins/directives',
+    '@/plugins/print'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -92,6 +93,11 @@ module.exports = {
     */
     extend (config, ctx) {
       config.devtool = 'cheap-module-eval-source-map'
+    },
+    loaders: {
+      less: {
+        javascriptEnabled: true
+      }
     }
   },
   server: {

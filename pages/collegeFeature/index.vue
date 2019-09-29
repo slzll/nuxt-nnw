@@ -3,15 +3,7 @@
     <PageHeader/>
     <div class="college_feature_page_container">
       <div class="container_24">
-        <div class="header">
-          <img src="~/assets/images/college_characteristics.png" alt="">
-          <div class="header_nav">
-            <span>您所在的位置：</span>
-            <nuxt-link to="/"><img src="~/assets/images/shouye.png" alt="">首页</nuxt-link>
-            <span>-></span>
-            <span class="active">学院特色</span>
-          </div>
-        </div>
+        <PageNav current="学院特色" :logo="require('~/assets/images/college_characteristics.png')"/>
         <div class="content">
           <div class="header_banner">
             学院将延安红色革命精神与绿色发展理念相结合，将线上先进的信息化技术手段与教学设备设施和线下的教学创新相结合，
@@ -37,11 +29,16 @@
 </template>
 
 <script>
-  import { PageHeader, PageFooter } from '~/components'
+  import { PageHeader, PageFooter, PageNav } from '~/components'
+  import { userInfo } from '~/service/mixin'
 
   export default {
     name: 'index',
-    components: { PageFooter, PageHeader },
+    head: {
+      title: '学院特色'
+    },
+    components: { PageNav, PageFooter, PageHeader },
+    mixins: [userInfo],
     data () {
       return {
         featureList: [
@@ -90,23 +87,6 @@
       margin-top: 40px;
       background: url("~assets/images/teaching_plan_bg.png") no-repeat bottom -240px center;
       padding-bottom: 324px;
-
-      .header {
-
-        .header_nav {
-          float: right;
-          line-height: 76px;
-
-          img {
-            margin-top: -2px;
-            margin-right: 4px;
-          }
-
-          .active {
-            color: @primary-color;
-          }
-        }
-      }
 
       .content {
         .header_banner {

@@ -1,1 +1,2 @@
 export const SAVE_USER_INFO = 'SAVE_USER_INFO'
+export const GET_USERAGENT = 'GET_USERAGENT'

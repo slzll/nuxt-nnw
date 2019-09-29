@@ -103,56 +103,58 @@
               </ul>
             </div>
           </nuxt-link>
-          <li role="presentation" ui-sref-active="active">
+          <li role="presentation">
             <a>教育安排</a>
             <div class="hover_nav_list">
               <ul>
-                <li role="presentation" ui-sref-active="active">
-                  <a @click="goThere($event, 0)">党员干部培训</a>
-                </li>
-                <li role="presentation" ui-sref-active="active">
-                  <a @click="goThere($event, 1)">企业家培训</a>
-                </li>
-                <li role="presentation" ui-sref-active="active">
-                  <a @click="goThere($event, 2)">营地教育</a>
-                </li>
-                <li role="presentation" ui-sref-active="active">
-                  <a @click="goThere($event, 3)">老年教育</a>
-                </li>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/#plan1">
+                  <a>党员干部培训</a>
+                </nuxt-link>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/#plan2">
+                  <a>企业家培训</a>
+                </nuxt-link>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/#plan3">
+                  <a>营地教育</a>
+                </nuxt-link>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/#plan4">
+                  <a>老年教育</a>
+                </nuxt-link>
               </ul>
             </div>
           </li>
         </ul>
         <ul class="pull-right">
-          <li role="presentation" ui-sref-active="active">
+          <li role="presentation">
             <a>学员风采</a>
             <div class="hover_nav_list">
               <ul>
-                <li role="presentation" ui-sref-active="active">
-                  <a ui-sref="article({categoryCode: '学习心得'})">学习心得</a>
-                </li>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/learningExperience">
+                  <a>学习心得</a>
+                </nuxt-link>
               </ul>
             </div>
           </li>
-          <li role="presentation" ui-sref-active="active">
-            <a ui-sref="successfulCase">成功案例</a>
-          </li>
-          <li role="presentation" ui-sref-active="active">
+          <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/successfulCase">
+            <a>成功案例</a>
+          </nuxt-link>
+          <li role="presentation">
             <a>联系我们</a>
             <div class="hover_nav_list">
               <ul>
-                <li role="presentation" ui-sref-active="active">
-                  <a ui-sref="articleDetail({ID: 304})">招聘信息</a>
-                </li>
-                <li role="presentation" ui-sref-active="active">
-                  <a ui-sref="contactUs">培训预约</a>
-                </li>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact
+                           :to="{name: 'newsDetail', query: {Id: 304}}">
+                  <a>招聘信息</a>
+                </nuxt-link>
+                <nuxt-link role="presentation" tag="li" exact-active-class="active" exact to="/contactUs">
+                  <a>培训预约</a>
+                </nuxt-link>
               </ul>
             </div>
           </li>
-          <li role="presentation" ui-sref-active="active">
-            <a ui-sref="newsDetail({Id: 345})">合作单位</a>
-          </li>
+          <nuxt-link role="presentation" tag="li" exact-active-class="active" exact
+                     :to="{name: 'newsDetail', query: {Id: 345}}">
+            <a>合作单位</a>
+          </nuxt-link>
         </ul>
       </div>
     </div>
@@ -217,9 +219,9 @@
       </div>
       <Spin fix v-if="showSpin"/>
     </Modal>
-    <div class="scroll_to_top" @click="gotoTop">
+    <BackTop :bottom="100" :right="30">
       <img src="~/assets/images/top.png" alt="">
-    </div>
+    </BackTop>
   </div>
 </template>
 
@@ -280,13 +282,9 @@
         this.showError = false
         this.showError2 = false
       },
-      gotoTop () {
-      },
       async loginOut () {
         await LoginOut()
         window.location.reload()
-      },
-      goThere () {
       },
       forgetPassword () {
       },
@@ -598,14 +596,6 @@
           }
         }
       }
-    }
-
-    .scroll_to_top {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      cursor: pointer;
-      display: none;
     }
   }
 

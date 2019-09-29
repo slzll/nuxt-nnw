@@ -37,6 +37,7 @@ module.exports = {
     'vue/require-default-prop': 'off',
     'import/no-named-default': 'off',
     'vue/attribute-hyphenation': 'off',
-    'vue/no-use-v-if-with-v-for': 'off'
+    'vue/no-use-v-if-with-v-for': 'off',
+    'vue/no-v-html': 'off'
   }
 }

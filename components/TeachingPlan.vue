@@ -5,9 +5,10 @@
         <img class="teaching_plan_img" src="~/assets/images/teaching_plan.png" alt="">
         <ul class="plan_list">
           <li class="plan_item"
-              v-for="item in navigation"
+              v-for="(item,index) in navigation"
               :key="item.Id"
               :class="{active: activePlanId === item.Id}"
+              :id="'plan'+(index+1)"
           >
             <a @click="getPlanData(item)">
               <div class="plan_item_img_block">
@@ -51,8 +52,19 @@
         ]
       }
     },
+    watch: {
+      '$route' () {
+        const { hash } = this.$route
+        if (hash) {
+          const index = /plan(\d)/.exec(hash)[1] || 1
+          this.getPlanData(this.navigation[index - 1])
+        }
+      }
+    },
     mounted () {
-      this.getPlanData(this.navigation[0])
+      const { hash } = this.$route
+      let index = hash ? /plan(\d)/.exec(hash)[1] || 1 : 1
+      this.getPlanData(this.navigation[index - 1])
     },
     methods: {
       async getPlanData (item) {

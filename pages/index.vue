@@ -30,8 +30,8 @@
     BeautifulNnw,
     PageFooter
   } from '~/components'
-  import { SAVE_USER_INFO } from '~/store/mutation-types'
   import { ALLAPI } from '~/service/api'
+  import { userInfo } from '~/service/mixin'
 
   export default {
     head: {
@@ -48,64 +48,63 @@
       NoticeAnnouncement,
       PageHeader
     },
+    mixins: [userInfo],
     async asyncData ({ app, isDev }) {
       let prefix = !isDev && process.server ? 'http://localhost' : ''
-      const articleParams = { page: 1, rows: 3, sort: 'sort', order: 'desc' }
-      let leftNotice = await app.$axios.$post(prefix + ALLAPI.LeftNotice, articleParams)
-      const noticeData = leftNotice.Data.ListData
-      const imgPath = leftNotice.Data.Path
-      let teachingData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
-        ...articleParams,
-        rows: 8,
-        CategoryCode: '精品教学模块'
-      })
-      const teachingModuleList = teachingData.Data.ListData
-      const articleImgPath = teachingData.Data.Path
+      try {
+        const articleParams = { page: 1, rows: 3, sort: 'sort', order: 'desc' }
+        let leftNotice = await app.$axios.$post(prefix + ALLAPI.LeftNotice, articleParams)
+        const noticeData = leftNotice.Data.ListData
+        const imgPath = leftNotice.Data.Path
+        let teachingData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
+          ...articleParams,
+          rows: 8,
+          CategoryCode: '精品教学模块'
+        })
+        const teachingModuleList = teachingData.Data.ListData
+        const articleImgPath = teachingData.Data.Path
 
-      let teacherData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
-        ...articleParams,
-        rows: 6,
-        CategoryCode: '名师风采'
-      })
-      const teacherList = teacherData.Data.ListData
+        let teacherData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
+          ...articleParams,
+          rows: 6,
+          CategoryCode: '名师风采'
+        })
+        const teacherList = teacherData.Data.ListData
 
-      let successData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
-        ...articleParams,
-        rows: 4,
-        CategoryCode: '成功案例'
-      })
-      const caseList = successData.Data.ListData
+        let successData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
+          ...articleParams,
+          rows: 4,
+          CategoryCode: '成功案例'
+        })
+        const caseList = successData.Data.ListData
 
-      let beautifulData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
-        ...articleParams,
-        rows: 6,
-        CategoryCode: '南泥湾风光'
-      })
-      const beautifulList = beautifulData.Data.ListData
-      beautifulList.push({
-        Attachment: '',
-        Description: '南泥湾精彩当下',
-        Id: 'video_id',
-        Img: require('~/assets/images/nnwfg_img.png'),
-        Video: require('~/assets/images/nnwfg.mp4'),
-        Name: '南泥湾VCR',
-        isVideo: true
-      })
-      return {
-        noticeData,
-        imgPath,
-        teachingModuleList,
-        articleImgPath,
-        teacherList,
-        caseList,
-        beautifulList
+        let beautifulData = await app.$axios.$post(prefix + ALLAPI.ArticleList, {
+          ...articleParams,
+          rows: 6,
+          CategoryCode: '南泥湾风光'
+        })
+        const beautifulList = beautifulData.Data.ListData
+        beautifulList.push({
+          Attachment: '',
+          Description: '南泥湾精彩当下',
+          Id: 'video_id',
+          Img: require('~/assets/images/nnwfg_img.png'),
+          Video: require('~/assets/images/nnwfg.mp4'),
+          Name: '南泥湾VCR',
+          isVideo: true
+        })
+        return {
+          noticeData,
+          imgPath,
+          teachingModuleList,
+          articleImgPath,
+          teacherList,
+          caseList,
+          beautifulList
+        }
+      } catch (e) {
+        console.log('请求出错')
       }
-    },
-    async fetch ({ app, store, isDev }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
-      let userInfo = await app.$axios.$post(prefix + ALLAPI.LoginShort)
-      const { RoleName, UserType } = userInfo.Data
-      store.commit(SAVE_USER_INFO, { ...userInfo.Data.Model, RoleName, UserType })
     },
     mounted () {
     },

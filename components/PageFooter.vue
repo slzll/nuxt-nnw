@@ -38,19 +38,6 @@
         </a>
       </div>
     </div>
-
-    <div class="online_contact_container">
-      <div class="online_contact_header">
-        <i class="fa fa-window-close" ng-click="closeBlock()"></i>
-      </div>
-      <div class="online_contact_log_block"></div>
-      <div class="online_contact_question_block">
-        <textarea name="online_text" class="online_text form-control"></textarea>
-      </div>
-      <div class="online_contact_btn text-right">
-        <button class="btn btn-sm btn-primary">发送</button>
-      </div>
-    </div>
     <Modal class="contact_us_modal" v-model="showContactModal" width="702" footer-hide :closable="false">
       <img class="close_img" @click="showContactModal = false" src="~/assets/images/close.png" alt="">
       <div class="title">培训预约</div>
@@ -232,57 +219,6 @@
         margin-left: -62.5px;
         width: 100%;
         height: 48px;
-      }
-    }
-
-    .online_contact_container {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      z-index: 1001;
-      .wh(300px, 500px);
-      background-color: #FFF;
-      border-left: 1px solid @border-color-base;
-      border-right: 1px solid @border-color-base;
-
-      .online_contact_header {
-        .ht-lineHt(32px);
-        text-align: right;
-        background-color: @primary-color;
-        color: #FFF;
-        padding: 0 10px;
-
-        .fa {
-          color: #fff;
-          cursor: pointer;
-        }
-      }
-
-      .online_contact_log_block {
-        height: 328px;
-      }
-
-      .online_contact_question_block {
-        border-top: 1px solid @border-color-base;
-        height: 100px;
-
-        .online_text {
-          width: 100%;
-          height: 100%;
-          resize: none;
-          border: none;
-
-          &:focus {
-            box-shadow: none;
-          }
-        }
-      }
-
-      .online_contact_btn {
-        border-top: 1px solid @border-color-base;
-        .ht-lineHt(40px);
-        padding: 0 10px;
       }
     }
   }

@@ -2,16 +2,8 @@
   <div class="college_info_page">
     <PageHeader/>
     <div class="college_info_page_container">
-      <div class=" container_24">
-        <div class="header">
-          <img src="~/assets/images/company_profile.png" alt="">
-          <div class="header_nav">
-            <span>您所在的位置：</span>
-            <nuxt-link to="/"><img src="~/assets/images/shouye.png" alt="">首页</nuxt-link>
-            <span>-></span>
-            <span class="active">学院简介</span>
-          </div>
-        </div>
+      <div class="container_24">
+        <PageNav current="学院简介" :logo="require('~/assets/images/company_profile.png')"/>
         <div class="content">
           <div class="night_scene">
             <img src="~/assets/images/college_info_1.png" alt="">
@@ -48,11 +40,16 @@
 </template>
 
 <script>
-  import { PageHeader, PageFooter } from '~/components'
+  import { PageHeader, PageFooter, PageNav } from '~/components'
+  import { userInfo } from '~/service/mixin'
 
   export default {
     name: 'index',
-    components: { PageFooter, PageHeader }
+    head: {
+      title: '学院简介'
+    },
+    components: { PageNav, PageFooter, PageHeader },
+    mixins: [userInfo]
   }
 </script>
 
@@ -64,22 +61,6 @@
       margin-top: 40px;
       background: url("~assets/images/teaching_plan_bg.png") no-repeat bottom -240px center;
       padding-bottom: 324px;
-
-      .header {
-        .header_nav {
-          float: right;
-          line-height: 76px;
-
-          img {
-            margin-top: -2px;
-            margin-right: 4px;
-          }
-
-          .active {
-            color: @primary-color;
-          }
-        }
-      }
 
       .float_text {
         position: absolute;
