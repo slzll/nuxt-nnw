@@ -5,30 +5,32 @@
       <div class="container_24">
         <PageNav current="新闻中心" :logo="require('~/assets/images/news_center_logo.png')" :show-divide="true"/>
         <div class="news_detail_content_container container_24">
-          <div class="news_operation">
-            <div class="news_date_block" v-if="articleData.CreateDate">
-              <div class="news_date_day">{{articleData.CreateDate | dateFilter2('dd')}}</div>
-              <div class="news_date_month">{{articleData.CreateDate | dateFilter2('yyyy-MM')}}</div>
+          <Affix :offset-top="-135" @on-change="affixChange">
+            <div class="news_operation">
+              <div class="news_date_block" v-if="articleData.CreateDate">
+                <div class="news_date_day">{{articleData.CreateDate | dateFilter2('dd')}}</div>
+                <div class="news_date_month">{{articleData.CreateDate | dateFilter2('yyyy-MM')}}</div>
+              </div>
+              <div class="news_date_block" v-if="articleData.CreatedDate">
+                <div class="news_date_day">{{articleData.CreatedDate | dateFilter2('dd')}}</div>
+                <div class="news_date_month">{{articleData.CreatedDate | dateFilter2('yyyy-MM')}}</div>
+              </div>
+              <div>
+                <p class="gray_text">--其他--</p>
+                <a class="favorite_add"
+                   @click="favoriteAdd"
+                   v-show="!articleData.FavoriteId">
+                  <img src="~/assets/images/favorite_normal.png" alt="">
+                </a>
+                <a class="favorite_del" @click="favoriteDelete"
+                   v-show="articleData.FavoriteId">
+                  <img src="~/assets/images/favorite_active.png" alt="">
+                </a>
+                <a class="print" @click="print"></a>
+              </div>
             </div>
-            <div class="news_date_block" v-if="articleData.CreatedDate">
-              <div class="news_date_day">{{articleData.CreatedDate | dateFilter2('dd')}}</div>
-              <div class="news_date_month">{{articleData.CreatedDate | dateFilter2('yyyy-MM')}}</div>
-            </div>
-            <div>
-              <p class="gray_text">--其他--</p>
-              <a class="favorite_add"
-                 @click="favoriteAdd"
-                 v-show="!articleData.FavoriteId">
-                <img src="~/assets/images/favorite_normal.png" alt="">
-              </a>
-              <a class="favorite_del" @click="favoriteDelete"
-                 v-show="articleData.FavoriteId">
-                <img src="~/assets/images/favorite_active.png" alt="">
-              </a>
-              <a class="print" @click="print"></a>
-            </div>
-          </div>
-          <div class="article-detail">
+          </Affix>
+          <div class="article-detail" ref="detail">
             <div class="article-detail-title-bar">
               <p class="article-detail-title">{{articleData.Name}}</p>
               <p class="article-detail-info">
@@ -38,7 +40,7 @@
                 <a class="set_font_btn" @click="reduceFont">[缩小字体]</a>
                 <a class="set_font_btn" @click="increaseFont">[放大字体]</a>
               </p>
-              <div class="news-share"></div>
+              <div v-share:share="config"></div>
             </div>
             <div id="setFont" ref="content" class="article-detail-content justify" v-html="articleData.Content"></div>
             <div class="article-detail-footer clearfix">
@@ -71,9 +73,9 @@
 </template>
 
 <script>
-  import { PageHeader, PageFooter, PageNav } from '~/components'
+  import { PageFooter, PageHeader, PageNav } from '~/components'
   import { ALLAPI, FavoriteAdd, FavoriteDelete } from '~/service/api'
-  import { wxAuth, userInfo } from '~/service/mixin'
+  import { userInfo, wxAuth } from '~/service/mixin'
 
   let wx = {}
   if (process.client) {
@@ -88,6 +90,11 @@
     },
     components: { PageNav, PageFooter, PageHeader },
     mixins: [wxAuth, userInfo],
+    data () {
+      return {
+        config: {}
+      }
+    },
     watch: {
       '$route' (newVal, oldVal) {
         if (newVal.name === oldVal.name && newVal.query.Id !== oldVal.query.Id) {
@@ -95,11 +102,28 @@
         }
       }
     },
-    async asyncData ({ app, query }) {
-      let res = await app.$axios.$post(ALLAPI.ArticleContent, { Id: query.Id })
-      let articleData = res.Data
-      return {
-        articleData
+    async asyncData ({ app, query, isDev, redirect }) {
+      let prefix = !isDev && process.server ? 'http://localhost' : ''
+      try {
+        let res = await app.$axios.$post(prefix + ALLAPI.ArticleContent, { Id: query.Id })
+        let articleData = res.Data
+        return {
+          articleData
+        }
+      } catch (e) {
+      }
+    },
+    mounted () {
+      this.config = {
+        url: this.url, // 网址，默认使用 window.location.href
+        source: window.location.origin, // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
+        title: this.articleData.Name, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
+        description: this.articleData.Description || this.articleData.Name, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
+        image: this.articleData.ArticleImg ? 'https://www.yannw.cn' + this.articleData.ArticleImg : 'https://www.yannw.cn/webapp/logo.png', // 图片, 默认取网页中第一个img标签
+        sites: ['qzone', 'qq', 'weibo', 'wechat', 'douban'], // 启用的站点
+        disabled: ['google', 'facebook', 'twitter'], // 禁用的站点
+        wechatQrcodeTitle: '微信扫一扫：分享', // 微信二维码提示文字
+        wechatQrcodeHelper: '<p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p>'
       }
     },
     methods: {
@@ -171,6 +195,13 @@
       },
       increaseFont () {
         this.setFont(true)
+      },
+      affixChange (flag) {
+        if (flag) {
+          this.$refs.detail.style.marginLeft = 160 + 'px'
+        } else {
+          this.$refs.detail.style.marginLeft = 0 + 'px'
+        }
       }
     }
   }
