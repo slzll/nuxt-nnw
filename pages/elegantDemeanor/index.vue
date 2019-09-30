@@ -16,7 +16,9 @@
                 </div>
                 <p class="teacher_business">职务：{{item.Description}}</p>
               </div>
-              <a class="teacher_link" ui-sref="articleDetail({ID: item.Id})" target="_blank">查看详情</a>
+              <nuxt-link class="teacher_link" :to="{name: 'newsDetail', query:{Id: item.Id}}" target="_blank">
+                查看详情
+              </nuxt-link>
             </li>
           </ul>
           <div class="pagination_container">

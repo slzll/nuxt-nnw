@@ -13,10 +13,13 @@
 
 <script>
   import { PageHeader, PageFooter } from '~/components'
+  import { userInfo } from '~/service/mixin'
 
   export default {
     name: 'error',
-    components: { PageHeader, PageFooter }
+    head: { title: '404' },
+    components: { PageHeader, PageFooter },
+    mixins: [userInfo]
   }
 </script>
 

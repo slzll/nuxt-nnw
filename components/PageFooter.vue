@@ -52,7 +52,7 @@
         <div class="list2-5"><p>张老师:</p>
           <p class="phone">13038579956</p></div>
       </div>
-      <Form class="appoint_form" :model="appointData" :label-width="80" inline>
+      <Form class="appoint_form" ref="form" :model="appointData" :rules="rules" :label-width="80" inline>
         <FormItem prop="TrainTitle" label="培训主题：" class="form-group train_topic">
           <Input class="form-control" v-model="appointData.TrainTitle"/>
         </FormItem>
@@ -79,7 +79,7 @@
         </FormItem>
         <FormItem class="form-group">
           <Button class="btn create_appoint_btn" :class="hasSubmited?'btn-success':'btn-primary'"
-                  :loading="loading" @click="createAppoint">
+                  :loading="loading" :disabled="hasSubmited" @click="createAppoint">
             {{hasSubmited?'预约成功':'立即预约'}}
           </Button>
         </FormItem>
@@ -108,53 +108,41 @@
           ContactsNumber: '',
           Remarks: ''
         },
+        rules: {
+          CompanyName: [{ required: true, message: '请输入预约单位', trigger: 'change,blur' }],
+          TrainStartDate: [{ required: true, message: '请选择培训日期', trigger: 'change,blur', type: 'date' }],
+          Contacts: [{ required: true, message: '请输入预约人', trigger: 'change,blur' }],
+          ContactsNumber: [{ required: true, message: '请输入联系电话', trigger: 'change,blur' }]
+        },
         loading: false
       }
     },
     methods: {
       resetData () {
-        this.hasSubmited = true
-        this.appointData = {
-          TrainTitle: '',
-          CompanyName: '',
-          TrainNumber: '',
-          TrainDay: '',
-          TrainStartDate: '',
-          Contacts: '',
-          ContactsNumber: '',
-          Remarks: ''
-        }
+        this.hasSubmited = false
+        this.$refs.form.resetFields()
       },
       toggleModalShow (flag) {
         if (!flag) {
           this.resetData()
         }
       },
-      async createAppoint () {
-        if (!this.appointData.CompanyName) {
-          this.$Message.error('请输入预约单位')
-          return
-        }
-        if (!this.appointData.TrainStartDate) {
-          this.$Message.error('请输入培训日期')
-          return
-        }
-        if (!this.appointData.Contacts) {
-          this.$Message.error('请输入预约人')
-          return
-        }
-        if (!this.appointData.ContactsNumber) {
-          this.$Message.error('请输入联系电话')
-          return
-        }
-        this.loading = true
-        let res = await TrainingAppointmentCreate(this.appointData)
-        this.loading = false
-        if (res.IsSuccess) {
-          this.hasSubmited = true
-        } else {
-          this.$Modal.error({ title: '提示', content: res.Message })
-        }
+      createAppoint () {
+        console.log(this.appointData.TrainStartDate)
+        this.$refs.form.validate(async valid => {
+          if (valid) {
+            this.loading = true
+            let res = await TrainingAppointmentCreate(this.appointData)
+            this.loading = false
+            if (res.IsSuccess) {
+              this.hasSubmited = true
+            } else {
+              this.$Modal.error({ title: '提示', content: res.Message })
+            }
+          } else {
+            this.$Message.error('请填写必填信息')
+          }
+        })
       }
     }
   }
@@ -333,6 +321,12 @@
       .ivu-form-item {
         margin-right: 0;
         margin-bottom: 0;
+      }
+
+      .ivu-form-item-label {
+        &:before {
+          display: none;
+        }
       }
 
       .form-group {

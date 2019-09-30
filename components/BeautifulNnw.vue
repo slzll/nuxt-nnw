@@ -1,6 +1,6 @@
 <template>
   <div class="beautiful_nanniwan container_24">
-    <ModuleTitle name="走进南泥湾" ename="NANNIWAN SCENERY"/>
+    <ModuleTitle name="走进南泥湾" ename="NANNIWAN SCENERY" :show-more="false"/>
     <div class="beautiful_nanniwan_container">
       <div class="img_shown_block"
            v-for="item in listData"

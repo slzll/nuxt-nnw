@@ -35,8 +35,8 @@
                 <span v-if="articleData.Author">作者：{{articleData.Author}}</span>
                 <span v-if="!articleData.Author">作者：{{articleData.Creator}}</span>
                 <span v-show="articleData.ClickCount">浏览次数：{{articleData.ClickCount}}</span>
-                <a class="set_font" @click="reduceFont">[缩小字体]</a>
-                <a class="set_font" @click="increaseFont">[放大字体]</a>
+                <a class="set_font_btn" @click="reduceFont">[缩小字体]</a>
+                <a class="set_font_btn" @click="increaseFont">[放大字体]</a>
               </p>
               <div class="news-share"></div>
             </div>

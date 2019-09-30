@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import { PageHeader, PageFooter, NewsList, PageNav } from '~/components'
+  import { NewsList, PageFooter, PageHeader, PageNav } from '~/components'
   import { ALLAPI, ArticleList } from '~/service/api'
   import { userInfo } from '~/service/mixin'
 
@@ -46,6 +46,15 @@
       return {
         activeCode: '',
         paginationConf: {}
+      }
+    },
+    watch: {
+      '$route' (newVal, oldVal) {
+        if (newVal.name === oldVal.name) {
+          let code = newVal.query.categoryCode
+          let codes = Object.keys(this.newsData)
+          this.activeCode = codes.includes(code) ? code : codes[0]
+        }
       }
     },
     async asyncData ({ app, isDev }) {

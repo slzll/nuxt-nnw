@@ -38,7 +38,6 @@
     },
     mounted () {
       this.activeCode = this.category[0].Code
-      console.log(this.data[this.activeCode])
     }
   }
 </script>

@@ -19,6 +19,7 @@ export const ALLAPI = {
   FavoriteAdd: `${Page}/FavoriteAdd`,
   FavoriteDelete: `${Page}/FavoriteDelete`,
   ArticleCategory: `${Page}/ArticleCategory`,
+  TrainingScheduleList: `${Page}/TrainingScheduleList`,
   TrainingAppointmentCreate: `${TrainingAppointment}/TrainingAppointmentCreate`,
   GetWechatWxAuthModel: `${WeChat}/GetWechatWxAuthModel`
 }
