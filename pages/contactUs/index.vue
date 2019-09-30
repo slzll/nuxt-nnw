@@ -20,6 +20,9 @@
 
   export default {
     name: 'index',
+    head: {
+      title: '培训预约'
+    },
     components: { PageFooter, PageHeader },
     mixins: [userInfo]
   }

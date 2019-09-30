@@ -3,7 +3,7 @@
     <ModuleTitle name="成功案例" ename="SUCCESSFUL CASE" :link-url="{name: 'successfulCase'}"/>
     <ul class="successful_case_list">
       <li class="case_item" v-for="item in listData" :key="item.Id">
-        <nuxt-link :to="{name: 'articleDetail', query: {Id: item.Id}}" :title="item.Name" target="_blank">
+        <nuxt-link :to="{name: 'newsDetail', query: {Id: item.Id}}" :title="item.Name" target="_blank">
           <img :src="imgPath+'/'+item.Img" :title="item.Name" v-err-src :alt="item.Name">
           <p>{{item.Name}}</p>
         </nuxt-link>

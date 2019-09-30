@@ -29,12 +29,6 @@
     },
     components: { PageNav, NewsList, PageHeader, PageFooter },
     mixins: [userInfo],
-    data () {
-      return {
-        activeCode: '',
-        paginationConf: {}
-      }
-    },
     async asyncData ({ app, isDev }) {
       let prefix = !isDev && process.server ? 'http://localhost' : ''
       let pageSize = 5

@@ -1,14 +1,14 @@
 <template>
   <div class="tmNewsInformation">
     <ul class="news_nav">
-      <li v-for="(item,$index) in newsCategory" :key="item.Id" :class="{active: activeTab === $index}">
-        <a @click="getNewsContent($index,item.Code)">{{item.Name}}</a>
+      <li v-for="item in category" :key="item.Id" :class="{active: activeCode === item.Code}">
+        <a @click="activeCode = item.Code">{{item.Name}}</a>
       </li>
       <nuxt-link class="more" :to="{name: 'newsCenter',query: {categoryCode: activeCode}}"
                  target="_blank"></nuxt-link>
     </ul>
     <div class="tab-content">
-      <div class="tab-panel perlist">
+      <div class="tab-panel perlist" v-for="(articleData,key) in data" :key="key" v-show="key === activeCode">
         <ul class="clearfix">
           <li class="pull-left" v-for="articleList in articleData" :key="articleList.Id">
             <span class="square_4"></span>
@@ -20,42 +20,25 @@
           </li>
         </ul>
       </div>
-      <Spin fix v-if="showSpin"/>
     </div>
   </div>
 </template>
 
 <script>
-  import { ArticleList } from '../service/api'
-
   export default {
     name: 'NewsInformation',
-    props: {},
+    props: {
+      category: { type: Array },
+      data: { type: Object }
+    },
     data () {
       return {
-        activeTab: 0,
-        activeCode: null,
-        showSpin: false,
-        newsCategory: [
-          { Code: '新闻资讯', Name: '新闻资讯' },
-          { Code: '学院公告', Name: '学院公告' },
-          { Code: '培训公告', Name: '培训公告' }
-        ],
-        articleData: []
+        activeCode: null
       }
     },
     mounted () {
-      this.getNewsContent(0, this.newsCategory[0].Code)
-    },
-    methods: {
-      async getNewsContent ($index, CategoryCode) {
-        this.showSpin = true
-        this.activeTab = $index
-        this.activeCode = CategoryCode
-        let res = await ArticleList({ rows: 7, CategoryCode })
-        this.showSpin = false
-        this.articleData = res.Data.ListData
-      }
+      this.activeCode = this.category[0].Code
+      console.log(this.data[this.activeCode])
     }
   }
 </script>

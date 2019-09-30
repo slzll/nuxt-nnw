@@ -38,7 +38,8 @@
         </a>
       </div>
     </div>
-    <Modal class="contact_us_modal" v-model="showContactModal" width="702" footer-hide :closable="false">
+    <Modal class="contact_us_modal" v-model="showContactModal" width="702" footer-hide :closable="false"
+           @on-visible-change="toggleModalShow">
       <img class="close_img" @click="showContactModal = false" src="~/assets/images/close.png" alt="">
       <div class="title">培训预约</div>
       <div class="list contact_phones">
@@ -89,19 +90,71 @@
 </template>
 
 <script>
+  import { TrainingAppointmentCreate } from '~/service/api'
+
   export default {
     name: 'PageFooter',
     data () {
       return {
         showContactModal: false,
         hasSubmited: false,
-        appointData: {},
+        appointData: {
+          TrainTitle: '',
+          CompanyName: '',
+          TrainNumber: '',
+          TrainDay: '',
+          TrainStartDate: '',
+          Contacts: '',
+          ContactsNumber: '',
+          Remarks: ''
+        },
         loading: false
       }
     },
     methods: {
-      createAppoint () {
+      resetData () {
+        this.hasSubmited = true
+        this.appointData = {
+          TrainTitle: '',
+          CompanyName: '',
+          TrainNumber: '',
+          TrainDay: '',
+          TrainStartDate: '',
+          Contacts: '',
+          ContactsNumber: '',
+          Remarks: ''
+        }
+      },
+      toggleModalShow (flag) {
+        if (!flag) {
+          this.resetData()
+        }
+      },
+      async createAppoint () {
+        if (!this.appointData.CompanyName) {
+          this.$Message.error('请输入预约单位')
+          return
+        }
+        if (!this.appointData.TrainStartDate) {
+          this.$Message.error('请输入培训日期')
+          return
+        }
+        if (!this.appointData.Contacts) {
+          this.$Message.error('请输入预约人')
+          return
+        }
+        if (!this.appointData.ContactsNumber) {
+          this.$Message.error('请输入联系电话')
+          return
+        }
         this.loading = true
+        let res = await TrainingAppointmentCreate(this.appointData)
+        this.loading = false
+        if (res.IsSuccess) {
+          this.hasSubmited = true
+        } else {
+          this.$Modal.error({ title: '提示', content: res.Message })
+        }
       }
     }
   }

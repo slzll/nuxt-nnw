@@ -1,7 +1,7 @@
 <template>
   <div class="teaching_module container_24 mar_top_20">
     <ModuleTitle name="精品教学模块" ename="BOUTIQUE TEACHING MODULE"
-                 :link-url="{name: 'newsCenter', query: {categoryCode: '精品教学模块'}}"/>
+                 :link-url="{name: 'article', query: {categoryCode: '精品教学模块'}}"/>
     <div class="teaching_module_carousel">
       <div class="carousel_list" v-swiper:mySwiper="options">
         <div class="swiper-wrapper">

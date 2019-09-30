@@ -35,22 +35,26 @@
                 <span v-if="articleData.Author">作者：{{articleData.Author}}</span>
                 <span v-if="!articleData.Author">作者：{{articleData.Creator}}</span>
                 <span v-show="articleData.ClickCount">浏览次数：{{articleData.ClickCount}}</span>
-                <a @click="reduceFont($event)">[缩小字体]</a>
-                <a @click="increaseFont($event)">[放大字体]</a>
+                <a class="set_font" @click="reduceFont">[缩小字体]</a>
+                <a class="set_font" @click="increaseFont">[放大字体]</a>
               </p>
               <div class="news-share"></div>
             </div>
-            <div id="setFont" class="article-detail-content justify" v-html="articleData.Content"></div>
+            <div id="setFont" ref="content" class="article-detail-content justify" v-html="articleData.Content"></div>
             <div class="article-detail-footer clearfix">
               <div class="up_and_down_link pull-left">
                 <p class="ellipsis">
-                  <a v-show="articleData.UpName" :title="articleData.UpName"
-                     ui-sref="newsDetail({Id:articleData.UpId})">上一篇：{{articleData.UpName}}</a>
+                  <nuxt-link v-show="articleData.UpName" :title="articleData.UpName"
+                             :to="{name: 'newsDetail', query:{Id:articleData.UpId}}">
+                    上一篇：{{articleData.UpName}}
+                  </nuxt-link>
                   <a v-show="!articleData.UpName">上一篇：无</a>
                 </p>
                 <p class="ellipsis">
-                  <a v-show="articleData.DownName" :title="articleData.DownName"
-                     ui-sref="newsDetail({Id:articleData.DownId})">下一篇：{{articleData.DownName}}</a>
+                  <nuxt-link v-show="articleData.DownName" :title="articleData.DownName"
+                             :to="{name: 'newsDetail', query:{Id:articleData.DownId}}">
+                    下一篇：{{articleData.DownName}}
+                  </nuxt-link>
                   <a v-show="!articleData.DownName">下一篇：无</a>
                 </p>
               </div>
@@ -151,9 +155,22 @@
       print () {
         this.$htmlToPaper('setFont')
       },
+      setFont (flag) {
+        const { content } = this.$refs
+        const elements = content.querySelectorAll('p,span,div')
+        for (let i = 0, len = elements.length; i < len; i++) {
+          let el = elements[i]
+          let fontSize = el.style.fontSize
+          fontSize = parseInt(fontSize) || 14
+          fontSize = flag ? Math.min(++fontSize, 42) : Math.max(--fontSize, 12)
+          el.style.fontSize = fontSize + 'px'
+        }
+      },
       reduceFont () {
+        this.setFont(false)
       },
       increaseFont () {
+        this.setFont(true)
       }
     }
   }
@@ -253,6 +270,10 @@
               &:hover {
                 color: @text-color-2;
               }
+            }
+
+            .set_font_btn {
+              user-select: none;
             }
           }
 

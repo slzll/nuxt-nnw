@@ -2,6 +2,7 @@ import fetch from './fetch'
 
 const API = '/api'
 const Page = `${API}/Page`
+const TrainingAppointment = `${API}/TrainingAppointment`
 const WeChat = `${API}/WeChat`
 const articleParams = { page: 1, rows: 5, order: 'desc', sort: 'sort' }
 export const ALLAPI = {
@@ -9,12 +10,16 @@ export const ALLAPI = {
   LoginCode: `${Page}/LoginCode`,
   LoginOut: `${Page}/LoginOut`,
   Login: `${Page}/Login`,
+  Register: `${Page}/Register`,
   ArticleList: `${Page}/ArticleList`,
   LeftNotice: `${Page}/LeftNotice`,
   TeachClassList: `${Page}/TeachClassList`,
   ArticleContent: `${Page}/ArticleContent`,
+  NoticeContent: `${Page}/NoticeContent`,
   FavoriteAdd: `${Page}/FavoriteAdd`,
   FavoriteDelete: `${Page}/FavoriteDelete`,
+  ArticleCategory: `${Page}/ArticleCategory`,
+  TrainingAppointmentCreate: `${TrainingAppointment}/TrainingAppointmentCreate`,
   GetWechatWxAuthModel: `${WeChat}/GetWechatWxAuthModel`
 }
 
@@ -22,11 +27,14 @@ export const LoginShort = (data) => fetch.post(ALLAPI.LoginShort, { ...data })
 export const LoginOut = (data) => fetch.post(ALLAPI.LoginOut, { ...data })
 export const LoginCode = (data) => fetch.post(ALLAPI.LoginCode, { ...data })
 export const Login = (data) => fetch.post(ALLAPI.Login, { ...data })
+export const Register = (data) => fetch.post(ALLAPI.Register, { ...data })
 export const ArticleList = (data) => fetch.post(ALLAPI.ArticleList, { ...articleParams, ...data })
 export const TeachClassList = (data) => fetch.post(ALLAPI.TeachClassList, { ...data })
 export const ArticleContent = (data) => fetch.post(ALLAPI.ArticleContent, { ...data })
+export const NoticeContent = (data) => fetch.post(ALLAPI.NoticeContent, { ...data })
 export const FavoriteAdd = (data) => fetch.post(ALLAPI.FavoriteAdd, { ...data })
 export const FavoriteDelete = (data) => fetch.post(ALLAPI.FavoriteDelete, { ...data })
+export const TrainingAppointmentCreate = (data) => fetch.post(ALLAPI.TrainingAppointmentCreate, { ...data })
 export const GetWechatWxAuthModel = (data) => fetch.post(ALLAPI.GetWechatWxAuthModel, { ...data })
 
 // 封装微信签名
