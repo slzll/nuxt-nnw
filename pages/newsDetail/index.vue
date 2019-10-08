@@ -119,7 +119,7 @@
         source: window.location.origin, // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
         title: this.articleData.Name, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
         description: this.articleData.Description || this.articleData.Name, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
-        image: this.articleData.ArticleImg ? 'https://www.yannw.cn' + this.articleData.ArticleImg : 'https://www.yannw.cn/webapp/logo.png', // 图片, 默认取网页中第一个img标签
+        image: this.articleData.Img ? 'https://www.yannw.cn' + this.articleData.Img : 'https://www.yannw.cn/webapp/logo.png', // 图片, 默认取网页中第一个img标签
         sites: ['qzone', 'qq', 'weibo', 'wechat', 'douban'], // 启用的站点
         disabled: ['google', 'facebook', 'twitter'], // 禁用的站点
         wechatQrcodeTitle: '微信扫一扫：分享', // 微信二维码提示文字
@@ -133,7 +133,7 @@
           title: this.articleData.Name, // 分享标题
           desc: this.articleData.Name, // 分享描述
           link: this.url, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-          imgUrl: this.articleData.ArticleImg ? 'https://www.yannw.cn' + this.articleData.ArticleImg : 'https://www.yannw.cn/webapp/logo.png',
+          imgUrl: this.articleData.Img ? 'https://www.yannw.cn' + this.articleData.Img : 'https://www.yannw.cn/webapp/logo.png',
           success: () => console.log('success'),
           cancel: () => console.log('cancel')
         }

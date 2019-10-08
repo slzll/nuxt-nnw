@@ -7,7 +7,7 @@
           <div class="news_date_month">{{item.CreateDate | dateFilter2('yyyy-MM')}}</div>
         </div>
         <div class="news_info" :class="{max_width: !item.Img, min_width: !!item.Img}">
-          <div class="news_name">
+          <div class="news_name" :title="item.Name">
             <nuxt-link :to="{name: 'newsDetail', query: {Id: item.Id}}">{{item.Name}}</nuxt-link>
           </div>
           <div class="news_desc">{{item.Description || '无' | wordLimit(100)}}</div>
@@ -83,6 +83,7 @@
           .news_name {
             .ht-lineHt(48px);
             font-size: 16px;
+            .ellipsis();
           }
 
           .news_desc {
