@@ -57,8 +57,7 @@
         }
       }
     },
-    async asyncData ({ app, isDev }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app }) {
       const newsCategory = [
         { Code: '新闻资讯', Name: '新闻资讯' },
         { Code: '培训动态', Name: '培训动态' },
@@ -71,8 +70,7 @@
       try {
         const articleParams = { page: 1, rows: pageSize, sort: 'sort', order: 'desc' }
         for (const category of newsCategory) {
-          let res = await app.$axios.$post(prefix + ALLAPI.ArticleList,
-            { ...articleParams, CategoryCode: category.Code })
+          let res = await app.$axios.$post(ALLAPI.ArticleList, { ...articleParams, CategoryCode: category.Code })
           newsData[category.Code] = {
             Code: category.Code,
             newsList: res.Data.ListData,

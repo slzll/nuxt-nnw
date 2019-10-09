@@ -29,14 +29,12 @@
     },
     components: { PageNav, NewsList, PageHeader, PageFooter },
     mixins: [userInfo],
-    async asyncData ({ app, isDev }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app }) {
       let pageSize = 5
       try {
         const articleParams = { page: 1, rows: pageSize, sort: 'sort', order: 'desc' }
 
-        let res = await app.$axios.$post(prefix + ALLAPI.ArticleList,
-          { ...articleParams, CategoryCode: '成功案例' })
+        let res = await app.$axios.$post(ALLAPI.ArticleList, { ...articleParams, CategoryCode: '成功案例' })
         let newsList = res.Data.ListData
         let total = res.Data.Count
         let page = 1

@@ -93,8 +93,7 @@
       }
     },
     watch: {},
-    async asyncData ({ app, query, isDev }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app, query }) {
       const { categoryCode } = query
       const articleParams = { page: 1, rows: 15, sort: 'sort', order: 'desc', categoryCode }
       let categoryData = []
@@ -103,10 +102,10 @@
       let total = 0
       let CategoryId = 0
       try {
-        let cateRes = await app.$axios.$post(prefix + ALLAPI.ArticleCategory)
+        let cateRes = await app.$axios.$post(ALLAPI.ArticleCategory)
         categoryData = cateRes.Data.ListData
         categoryData = convertTree(categoryData)
-        let listRes = await app.$axios.$post(prefix + ALLAPI.ArticleList, articleParams)
+        let listRes = await app.$axios.$post(ALLAPI.ArticleList, articleParams)
         articleListData = listRes.Data.ListData
         total = listRes.Data.Count
         CategoryId = listRes.Data.CategoryId

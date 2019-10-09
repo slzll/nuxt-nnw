@@ -75,10 +75,9 @@
     head: { title: '日程安排' },
     components: { PageNav, PageFooter, PageHeader },
     mixins: [userInfo],
-    async asyncData ({ app, isDev, query }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app, query }) {
       try {
-        let res = await app.$axios.$post(prefix + ALLAPI.TrainingScheduleList, { Id: query.Id })
+        let res = await app.$axios.$post(ALLAPI.TrainingScheduleList, { Id: query.Id })
         let scheduleData = res.Data
         let scheduleList = res.Data.ListData
         return {

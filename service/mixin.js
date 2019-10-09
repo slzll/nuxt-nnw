@@ -37,8 +37,7 @@ export const wxAuth = {
 
 export const userInfo = {
   async fetch ({ app, store, isDev }) {
-    let prefix = !isDev && process.server ? 'http://localhost' : ''
-    let userInfo = await app.$axios.$post(prefix + ALLAPI.LoginShort)
+    let userInfo = await app.$axios.$post(ALLAPI.LoginShort)
     const { RoleName, UserType } = userInfo.Data
     store.commit(SAVE_USER_INFO, { ...userInfo.Data.Model, RoleName, UserType })
   }

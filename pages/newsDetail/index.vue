@@ -102,10 +102,9 @@
         }
       }
     },
-    async asyncData ({ app, query, isDev, redirect }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app, query }) {
       try {
-        let res = await app.$axios.$post(prefix + ALLAPI.ArticleContent, { Id: query.Id })
+        let res = await app.$axios.$post(ALLAPI.ArticleContent, { Id: query.Id })
         let articleData = res.Data
         return {
           articleData

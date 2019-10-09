@@ -49,11 +49,10 @@
       PageHeader
     },
     mixins: [userInfo],
-    async asyncData ({ app, isDev }) {
-      let prefix = !isDev && process.server ? 'http://localhost' : ''
+    async asyncData ({ app }) {
       try {
         const articleParams = { page: 1, rows: 3, sort: 'sort', order: 'desc' }
-        let leftNotice = await app.$axios.$post(prefix + ALLAPI.LeftNotice, articleParams)
+        let leftNotice = await app.$axios.$post(ALLAPI.LeftNotice, articleParams)
         const noticeData = leftNotice.Data.ListData
         const imgPath = leftNotice.Data.Path
         const newsCategory = [
@@ -64,24 +63,24 @@
         const newsData = {}
         for (let key in newsCategory) {
           let item = newsCategory[key]
-          let res = await app.$axios.$post(prefix + ALLAPI.ArticleList,
+          let res = await app.$axios.$post(ALLAPI.ArticleList,
             { ...articleParams, rows: 7, CategoryCode: item.Code })
           newsData[item.Code] = res.Data.ListData
         }
-        let teachingData = await app.$axios.$post(prefix + ALLAPI.ArticleList,
+        let teachingData = await app.$axios.$post(ALLAPI.ArticleList,
           { ...articleParams, rows: 8, CategoryCode: '精品教学模块' })
         const teachingModuleList = teachingData.Data.ListData
         const articleImgPath = teachingData.Data.Path
 
-        let teacherData = await app.$axios.$post(prefix + ALLAPI.ArticleList,
+        let teacherData = await app.$axios.$post(ALLAPI.ArticleList,
           { ...articleParams, rows: 6, CategoryCode: '名师风采' })
         const teacherList = teacherData.Data.ListData
 
-        let successData = await app.$axios.$post(prefix + ALLAPI.ArticleList,
+        let successData = await app.$axios.$post(ALLAPI.ArticleList,
           { ...articleParams, rows: 4, CategoryCode: '成功案例' })
         const caseList = successData.Data.ListData
 
-        let beautifulData = await app.$axios.$post(prefix + ALLAPI.ArticleList,
+        let beautifulData = await app.$axios.$post(ALLAPI.ArticleList,
           { ...articleParams, rows: 6, CategoryCode: '南泥湾风光' })
         const beautifulList = beautifulData.Data.ListData
         beautifulList.push({

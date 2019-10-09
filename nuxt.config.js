@@ -38,8 +38,8 @@ module.exports = {
         name: 'description',
         content: '南泥湾是延安精神的发祥地，是中国军垦、农垦事业的发源地。 为了贯彻落实习近平总书记:“用好这笔财富，用活这部教材”的指示精神， 2019年3月，中共延安市委、延安市人民政府批准成立了延安南泥湾学院。 学院以弘扬“自力更生、艰苦奋斗”的南泥湾精神为宗旨， 努力建成党政领导干部、广大党员、企事业单位职工、知识分子、军队干部和青少年进行中共党史、党建理论、革命精神、红色文化教育、爱国主义教育、营地教育和新时代国情教育的新一代教育培训基地。'
       },
-      { name: 'site', content: 'https://www.yannw.cn' },
-      { name: 'baidu-site-verification', content: 'mC09DZZ8rC' }
+      { hid: 'site', name: 'site', content: 'https://www.yannw.cn' },
+      { hid: 'baidu-site-verification', name: 'baidu-site-verification', content: 'mC09DZZ8rC' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -68,10 +68,11 @@ module.exports = {
   */
   plugins: [
     '@/plugins/iview',
-    { src: '@/plugins/swiper', ssr: false },
     '@/plugins/filters',
-    '@plugins/directives',
+    '@/plugins/directives',
+    '@/plugins/axios',
     '@/plugins/print',
+    { src: '@/plugins/swiper', ssr: false },
     { src: '@/plugins/share', ssr: false }
   ],
   /*
@@ -124,5 +125,8 @@ module.exports = {
         component: resolve(__dirname, 'pages/404.vue')
       })
     }
+  },
+  render: {
+    http: { push: true } // 开启http2
   }
 }
