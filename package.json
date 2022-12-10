@@ -21,7 +21,7 @@
     "iview": "^3.1.5",
     "js-base64": "^2.5.1",
     "nuxt": "^2.0.0",
-    "qs": "^6.8.0",
+    "qs": "^6.8.3",
     "vue-awesome-swiper": "^3.1.3",
     "vue-html-to-paper": "^1.1.1",
     "vue-share-ssr": "^0.0.4",
